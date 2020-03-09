@@ -8,3 +8,60 @@ body video {
     position: absolute;
     opacity: 0.5;
 }
+
+#start1{
+  height: 80px;
+  width: 80px;
+  background-color: rgb(0,0,0,0.5);
+  border-radius: 50%;
+  left: 20px;
+  top:20px;
+  position: absolute;
+  border-color: white;
+}
+#start2{
+  height: 80px;
+  width: 80px;
+  background-color: rgb(0,0,0,0.5);
+  border-radius: 50%;
+  left: 700px;
+  top:20px;
+  position: absolute;
+
+}
+/* #end1{
+  height: 80px;
+  width: 80px;
+  background-color: rgb(255,0,0,0.5);
+  border-radius: 50%;
+  left: 310px;
+  top:500px;
+  position: absolute;
+}
+#end2{
+  height: 80px;
+  width: 80px;
+  background-color: rgb(255,0,0,0.5);
+  border-radius: 50%;
+  left: 430px;
+  top:500px;
+  position: absolute;
+} */
+
+#leftwrist{
+  left:30px;
+  top:30px;
+  position: absolute;
+  font-size: 16px;
+  color: white;
+
+}
+
+#rightwrist{
+  left:705px;
+  top:30px;
+  position: absolute;
+  font-size: 16px;
+  color: white;
+
+}

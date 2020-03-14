@@ -25,15 +25,9 @@ let lose = false;
 
 
 
-// let black = new Array(2);
-
-// let lerpedblackX = [];
-// let lerpedblackY = [];
-
 // p5js calls this code once when the page is loaded (and, during development,
 // when the code is modified.)
 export function setup() {
-// createCanvas(640, 480);
 createCanvas(800, 600);
 video = select("video") || createCapture(VIDEO);
 video.size(width, height);
@@ -56,11 +50,11 @@ mySound = loadSound('countdown.mp4');
 gameoverSound = loadSound('gameover.mp4');
 winSound = loadSound('win.mp4');
 
-// frameRate(30);
+
 setInterval(function timeIt(){
-if (countdown > 0 && timer == true) {
-countdown--;
-}
+  if (countdown > 0 && timer == true) {
+    countdown--;
+  }
 }, 1000);
 
 textFont('Georgia');
@@ -73,32 +67,22 @@ textFont('Georgia');
 // function that is applied to the list of poses whenever PoseNet processes a
 // video frame.
 export function draw() {
-// background(220);
-
-// if (frameCount % 30 == 0 && countdown >0){
-//   console.log('30 frames at 30fps has passed.');
-//   countdown --; //minus one from our countdown.
-//   console.log(countdown);
-// }
 
 fill(0);
 textSize(56);
 if (timer == true && isSoundPlayed == false && countdown == 20 ){
-mySound.loop();
-isSoundPlayed = true;
+  mySound.loop();
+  isSoundPlayed = true;
 }
 
 
 if (timer==true){
-// console.log(countdown);
+
 if (countdown >= 10) {
-text("0:" + countdown, 20,500);
+  text("0:" + countdown, 20,500);
 }else if(countdown < 10) {
-text('0:0' + countdown,20,500);
-// }else if (countdown == 0) {
-//   console.log("ok");
-//   text('game over', 20,550);
-//   mySound.stop();
+  text('0:0' + countdown,20,500);
+
 }
 
 
@@ -108,26 +92,13 @@ if (collideCircleCircle(dotX1,dotY1,100,width/2+50,height-50,80)==true
 && countdown>=0  && isHit == false && countdown != 20 && lose == false){
 
 if (win == false){
-winSound.play();
+  winSound.play();
 }
 
 win = true;
 
-// if (countdown >= 10) {
-//   a=countdown;
-//   text("0:" + a, 20,500);
-// }
-// if (countdown < 10) {
-//   a=countdown;
-//   text('0:0' + a,20,500);
-// }
 text('Well done!',20,550);
-// dotX1 = width/2+50;
-// dotX2 = width/2-50;
-// dotY1 = height-50;
-// dotY2 = height-50;
-// isHit = true;//test
-// mySound.stop();
+
 timer = false;
 count = 1;
 countdown = 0;
@@ -135,20 +106,17 @@ isSoundPlayed = false;
 mySound.stop();
 
 } else if (countdown == 0 && win == false) {
-console.log("ok");
-// timer = false;
-// count = 1;
+
 isSoundPlayed = false;//test
 hit = 0; //test
 
 if (lose == false){
-gameoverSound.play();
+  gameoverSound.play();
 }
 
 lose = true;
 text('game over', 20,550);
 mySound.stop();
-
 
 }
 
@@ -163,9 +131,7 @@ function drawPoses(poses) {
 translate(width, 0); // move the left side of the image to the right
 scale(-1.0, 1.0);
 image(video, 0, 0, video.width, video.height);
-// background(0,0,0,20);
-// drawKeypoints(poses);
-// drawSkeleton(poses);
+
 
 
 
@@ -193,17 +159,14 @@ ellipse(width/2+50,height-50,80,80);
 
 
 if (poses[0]!= undefined){
-// console.log(poses);
+
 var partname = poses[0].pose.keypoints;
-// console.log(partname);
 var leftWrist = partname[9];
 var rightWrist = partname[10];
-// console.log(leftWrist);
-// console.log(rightWrist);
 
 let d1 = dist(leftWrist.position.x, leftWrist.position.y, width-50,50);
 let d2 = dist(rightWrist.position.x, rightWrist.position.y, 50,50);
-// console.log(d);
+
 var blackX1 = leftWrist.position.x;
 var blackY1 = leftWrist.position.y;
 var blackX2 = rightWrist.position.x;
@@ -218,73 +181,68 @@ dotY2 = lerp(dotY2,blackY2,0.3);
 
 
 if (d1<=50 && count ==1 ) {
-// for (let j=0; j<leftWrist.length; j++){
-//   lerpedblackX[j] = lerp(lerpedblackX[j],blackX, 0.5);
-//   lerpedblackY[j] = lerp(lerpedblackY[j],blackY, 0.5);
-// }
-fill(0,0,0);
-noStroke();
-ellipse(dotX1,dotY1,50,50);
-ellipse(dotX2,dotY2,50,50);
-// ellipse(lerpedblackX[j],lerpedblackY[j],50,50);
-fill(255,0,0);
 
-ellipse(1200-dotX1,height-dotY1,50,50);
-ellipse(400-dotX2,height-dotY2,50,50);
+  fill(0,0,0);
+  noStroke();
+  ellipse(dotX1,dotY1,50,50);
+  ellipse(dotX2,dotY2,50,50);
 
-isHit = false;
-timer = true;
+  fill(255,0,0);
+  ellipse(1200-dotX1,height-dotY1,50,50);
+  ellipse(400-dotX2,height-dotY2,50,50);
+
+  isHit = false;
+  timer = true;
 if (hit == 0){ // make sure only the 1st time begins countdown
-  countdown = 20;
+countdown = 20;
 }
 
-count =2;
-win = false;//test
-lose = false;
+  count =2;
+  win = false;//test
+  lose = false;
 
 } else if(count ==2 && isHit ==false ){
 
-fill(0,0,0);
-noStroke();
-ellipse(dotX1,dotY1,50,50);
-ellipse(dotX2,dotY2,50,50);
-// ellipse(lerpedblackX[j],lerpedblackY[j],50,50);
-fill(255,0,0);
+  fill(0,0,0);
+  noStroke();
+  ellipse(dotX1,dotY1,50,50);
+  ellipse(dotX2,dotY2,50,50);
 
-ellipse(1200-dotX1,height-dotY1,50,50);
-ellipse(400-dotX2,height-dotY2,50,50);
+  fill(255,0,0);
+  ellipse(1200-dotX1,height-dotY1,50,50);
+  ellipse(400-dotX2,height-dotY2,50,50);
 
-//following we do the hit detection
+  //following we do the hit detection
 
-  if (collideRectCircle(600,height/4-20,200,40, dotX1,dotY1,50) == true // block1
-  || collideRectCircle(500,height/2-20,200,40,dotX1,dotY1,50) == true //block1
-  || collideRectCircle(400,450-20,200,40,dotX1,dotY1,50) == true){ //block1
+if (collideRectCircle(600,height/4-20,200,40, dotX1,dotY1,50) == true
+|| collideRectCircle(500,height/2-20,200,40,dotX1,dotY1,50) == true
+|| collideRectCircle(400,450-20,200,40,dotX1,dotY1,50) == true){
 
-    isHit = true;
-    count =1;
-    hit++;
-  }
-  if (collideRectCircle(width/2-200, 0, 200,170,width+400-dotX1,height-dotY1,50) == true){
-    isHit == true;
-    count =1;
-    hit++;
-  }
+  isHit = true;
+  count =1;
+  hit++;
+}
+if (collideRectCircle(width/2-200, 0, 200,170,width+400-dotX1,height-dotY1,50) == true){
+  isHit == true;
+  count =1;
+  hit++;
+}
 
-  if (collideRectCircle(width/2-200, 0, 200,170, dotX2,dotY2,50) == true // block2
-  || collideRectCircle(0,430,200,170, dotX2,dotY2,50) == true
-  || collideRectCircle(300,180,40,200, dotX2,dotY2,50) == true
-  || collideRectCircle(60,220,40,200, dotX2,dotY2,50) == true) {
-    isHit == true;
-    count =1;
-    hit++;
-  }
-  if (collideRectCircle(width/2-200, 0, 200,170,width+400-dotX1,height-dotY1,50) == true){
-    isHit == true;
-    count =1;
-    hit++;
-  }
+if (collideRectCircle(width/2-200, 0, 200,170, dotX2,dotY2,50) == true
+|| collideRectCircle(0,430,200,170, dotX2,dotY2,50) == true
+|| collideRectCircle(300,180,40,200, dotX2,dotY2,50) == true
+|| collideRectCircle(60,220,40,200, dotX2,dotY2,50) == true) {
+  isHit == true;
+  count =1;
+  hit++;
+}
+if (collideRectCircle(width/2-200, 0, 200,170,width+400-dotX1,height-dotY1,50) == true){
+  isHit == true;
+  count =1;
+  hit++;
+}
 
-  }
+}
 }
 
 
@@ -300,9 +258,9 @@ function drawKeypoints(poses) {
 poses.forEach(pose =>
 pose.pose.keypoints.forEach(keypoint => {
 if (keypoint.score > 0.2) {
-  fill(0, 255, 0);
-  // noStroke()；
-  square(keypoint.position.x, keypoint.position.y,20);
+fill(0, 255, 0);
+// noStroke()；
+square(keypoint.position.x, keypoint.position.y,20);
 
 }
 })

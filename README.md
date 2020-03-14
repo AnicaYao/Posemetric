@@ -1,3 +1,20 @@
+Name: Anica
+
+Project name: Posemetric
+
+Acknowledgements:
+   - Collision.2D library https://github.com/bmoren/p5.collide2D
+
+Instructions for using the project:
+   - Stand up and keep 2-3m away
+   - Avoid the obstacles carefully and try to finish it in 20s
+   - More levels are yet to come
+
+Link of project: https://anicas-posenet.herokuapp.com/
+
+
+
+
 # P5 ML PoseNet Start Kit
 
 This repository uses [p5.js](https://p5js.org), [ml5.js](https://ml5js.org), and
